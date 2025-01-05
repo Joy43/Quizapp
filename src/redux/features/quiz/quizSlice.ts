@@ -1,0 +1,28 @@
+ export const quizSlice=createSlice({
+    name:'quiz',
+    initialState:{
+        questions:[],
+        answers:[],
+        currentQuestionIndex:0,
+        quizOver:false,
+        score:0
+    },
+    reducers:{
+        setQuestions(state,action){
+            state.questions=action.payload
+        },
+        nextQuestion(state){
+            state.currentQuestionIndex++
+        },
+        prevQuestion(state){
+            state.currentQuestionIndex--
+        },
+        selectAnswer(state,action){
+            state.answers[state.currentQuestionIndex]=action.payload
+        },
+        endQuiz(state){
+            state.quizOver=true
+            state.score=state.answers.filter((answer,index)=>answer===state.questions[index].correctAnswer).length
+        }
+    }
+})
